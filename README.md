@@ -1,1 +1,1 @@
-# cordova-plugin-geolocator
+# cordova-plugin-geolocator!
