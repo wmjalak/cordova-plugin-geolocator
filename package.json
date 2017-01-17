@@ -1,17 +1,31 @@
 {
   "name": "cordova-plugin-geolocator",
-  "version": "1.0.0",
-  "description": "This plugin helps you to get the position in Android. Plugin is especially made to get one single fixed position.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "1.0.2",
+  "description": "This plugin helps you to get a single fixed reliable position in Android.",
+  "cordova": {
+    "id": "cordova-plugin-geolocator",
+    "platforms": [
+      "android"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wmjalak/cordova-plugin-geolocator.git"
   },
-  "author": "wmjalak <wmjalak@gmail.com>",
-  "license": "MIT",
+  "keywords": [
+    "cordova",
+    "geolocator",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "wmjalak",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/wmjalak/cordova-plugin-geolocator/issues"
   },
