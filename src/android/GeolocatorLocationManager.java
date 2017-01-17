@@ -62,9 +62,11 @@ public final class GeolocatorLocationManager implements LocationListener {
             isNetworkEnabled = locationManager
                     .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-            if (isGPSEnabled == false && isNetworkEnabled == false) {
+            if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
+                Log.i(TAG, "gps and network is disabled");
                 stopRequesting();
+                sendErrorResponse(-2); // Location is disabled
             } else {
                 if (isNetworkEnabled) {
                     locationManager.requestLocationUpdates(
@@ -94,6 +96,7 @@ public final class GeolocatorLocationManager implements LocationListener {
             public void run() {
                 Log.i(TAG, "getLocation timeout");
                 stopRequesting();
+                sendResponse();
             }
         }, timeInMs);
     }
@@ -112,12 +115,19 @@ public final class GeolocatorLocationManager implements LocationListener {
             if (locationManager != null) {
                 locationManager.removeUpdates(GeolocatorLocationManager.this);
             }
-            if (this.mLocation != null) {
-                this.mGeolocatorListener.onGeolocationSuccess(this.mLocation);
-            } else {
-                this.mGeolocatorListener.onGeolocationError(-1);
-            }
         }
+    }
+
+    private void sendResponse() {
+        if (this.mLocation != null) {
+            this.mGeolocatorListener.onGeolocationSuccess(this.mLocation);
+        } else {
+            this.mGeolocatorListener.onGeolocationError(-1);
+        }
+    }
+
+    private void sendErrorResponse(int errorCode) {
+        this.mGeolocatorListener.onGeolocationError(errorCode);
     }
 
     @Override
@@ -126,6 +136,7 @@ public final class GeolocatorLocationManager implements LocationListener {
         this.mLocation = location;
         if (location.getProvider().equals("gps")) {
             stopRequesting();
+            sendResponse();
         }
     }
 
