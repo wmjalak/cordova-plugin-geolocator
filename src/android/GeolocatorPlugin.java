@@ -63,12 +63,15 @@ public class GeolocatorPlugin extends CordovaPlugin implements GeolocatorListene
 
     public void onGeolocationSuccess(Location location) {
         Log.i(TAG, "onGeolocationSuccess");
+        JSONObject jsonObject = new JSONObject();
         JSONObject responseJSON = new JSONObject();
         try {
+            jsonObject.put("accuracy", location.getAccuracy());
+            jsonObject.put("latitude", location.getLatitude());
+            jsonObject.put("longitude", location.getLongitude());
+            responseJSON.put("coords", jsonObject);
+            responseJSON.put("timestamp", location.getTime());
             responseJSON.put("provider", location.getProvider());
-            responseJSON.put("accuracy", location.getAccuracy());
-            responseJSON.put("latitude", location.getLatitude());
-            responseJSON.put("longitude", location.getLongitude());
         } catch (JSONException e) {
             Log.e(TAG, "Error", e);
         }
