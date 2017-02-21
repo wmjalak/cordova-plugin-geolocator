@@ -7,7 +7,7 @@
     </engines>
 
     <name>Android Geolocator</name>
-    <description></description>
+    <description>Android geolocation plugin for both GPS and NETWORK-based location providers.</description>
     <license></license>
     <keywords>cordova,geolocator</keywords>
     <repo>https://unknown</repo>
